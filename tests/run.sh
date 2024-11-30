@@ -2,7 +2,7 @@
 set -e
 
 if [ "$#" -ne 1 ]; then
-    echo "usage: $0 source_file"
+    echo "usage: $0 <source_file>"
     exit
 fi
 

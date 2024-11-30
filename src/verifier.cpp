@@ -160,7 +160,7 @@ struct GraphValidator {
 
 int main(int argc, char* argv[]) {
     if (argc != 4) {
-        std::cout << "Usage: " << argv[0] << " test_name dot_file num_tests" << std::endl;
+        std::cout << "Usage: " << argv[0] << " <test_name> <dot_file> <num_tests>" << std::endl;
         return 1;
     }
     std::string testName = argv[1];
