@@ -118,7 +118,7 @@ struct GraphValidator {
             } else if (testName == "rotation") {
                 rotation(in[0], in[1], in[2], in[3], in[4], in[5], in[6], in[7], &out[0], &out[1], &out[2]);
             } else if (testName == "sobel") {
-                sobel(in[0], in[1], in[2], in[3], in[4], in[5], in[6], in[7], in[8], in[9], &in[10]);
+                sobel(in[0], in[1], in[2], in[3], in[4], in[5], in[6], in[7], in[8], in[9], &out[0]);
             } else {
                 std::cout << "Unknown test name: " << testName << std::endl;
                 return false;
@@ -145,7 +145,7 @@ struct GraphValidator {
                 float expected = *outputMapping[outNode];
                 float actual = nodes.find(outNode) == nodes.end() ? 0.0f : nodes[outNode].value;
                 
-                std::cout << "expected: " << expected << ", actual: " << actual << std::endl;
+                // std::cout << "expected: " << expected << ", actual: " << actual << std::endl;
                 if (expected != actual) {
                     std::cout << "Mismatch found for " << outNode << ": expected " << expected << ", got " << actual << std::endl;
                     return false;
