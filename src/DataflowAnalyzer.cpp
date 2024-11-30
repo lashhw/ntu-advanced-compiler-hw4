@@ -17,6 +17,7 @@ void visitor(Function &F) {
 
     DenseMap<Value*, std::string> nodeNames;
     DenseMap<Value*, std::string> outNames;
+    std::vector<std::pair<std::string, std::string>> outNamesList;
 
     unsigned inCounter = 0;
     unsigned outCounter = 0;
@@ -28,14 +29,15 @@ void visitor(Function &F) {
         } else {
             std::string outName = "out" + std::to_string(outCounter++);
             outNames[&arg] = outName;
+            outNamesList.emplace_back(std::string(arg.getName()), outName);
         }
     }
     errs() << "  }\n";
   
     errs() << "  subgraph cluster_outputs {\n";
     errs() << "    output_group [style=invis];\n";
-    for (const auto &outName : outNames)
-        errs() << "    " << outName.second << " [label=\"" << outName.first->getName() << "\", shape=box];\n";
+    for (const auto &outName : outNamesList)
+        errs() << "    " << outName.second << " [label=\"" << outName.first << "\", shape=box];\n";
     errs() << "  }\n";
 
     unsigned opCounter = 0;
