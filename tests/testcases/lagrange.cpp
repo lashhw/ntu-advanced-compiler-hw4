@@ -8,7 +8,7 @@ void lagrange(
     float x,
 
     // output interpolated value
-    float *result
+    float* result
 ) {
     // compute basis terms
     float l0_t1 = (x - x1) * (x - x2);

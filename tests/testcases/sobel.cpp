@@ -8,7 +8,7 @@ void sobel(
     float p20, float p21, float p22,
 
     // output
-    float* magnitude 
+    float *magnitude 
 ) {
     // Sobel X gradient
     float gx1 = p00 + (two * p10) + p20;

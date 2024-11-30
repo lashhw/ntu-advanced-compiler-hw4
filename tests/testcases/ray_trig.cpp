@@ -1,26 +1,22 @@
 void ray_trig(
-    // input
+    // input constant
     float one,
-    float o_x,
-    float o_y,
-    float o_z,
-    float d_x,
-    float d_y,
-    float d_z,
-    float p0_x,
-    float p0_y,
-    float p0_z,
-    float e1_x,
-    float e1_y,
-    float e1_z,
-    float e2_x,
-    float e2_y,
-    float e2_z,
+
+    // input ray origin
+    float o_x, float o_y, float o_z,
+
+    // input ray direction
+    float d_x, float d_y, float d_z,
+
+    // input triangle vertices
+    float p0_x, float p0_y, float p0_z,
+
+    // input triangle edges
+    float e1_x, float e1_y, float e1_z,
+    float e2_x, float e2_y, float e2_z,
 
     // output
-    float *t,
-    float *u,
-    float *v
+    float* t, float* u, float* v
 ) {
     float n_x = e1_y * e2_z - e1_z * e2_y;
     float n_y = e1_z * e2_x - e1_x * e2_z;
