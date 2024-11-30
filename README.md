@@ -16,7 +16,7 @@ To generate a dataflow graph for a specific source file, use:
 tests/run.sh <source_file>
 ```
 
-### Example:
+For example:
 ```bash
 tests/run.sh tests/testcases/matrix.cpp
 ```
