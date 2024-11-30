@@ -6,9 +6,6 @@ if [ "$#" -ne 1 ]; then
     exit
 fi
 
-cmake -S src/DataflowAnalyzer -B build
-cmake --build build
-
 clang -Xclang -disable-O0-optnone -fno-discard-value-names -ffp-contract=off -O0 -S -emit-llvm $1 -o - | opt -S -passes="mem2reg" -o noopt.ll
 opt -load-pass-plugin build/DataflowAnalyzerPass.so -passes=dataflow-analyzer --disable-output noopt.ll 2> noopt.dot
 
