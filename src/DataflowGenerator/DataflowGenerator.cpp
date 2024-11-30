@@ -84,7 +84,7 @@ void visitor(Function &F) {
     errs() << "}\n";
 }
 
-struct DataflowAnalyzerPass : public PassInfoMixin<DataflowAnalyzerPass> {
+struct DataflowGeneratorPass : public PassInfoMixin<DataflowGeneratorPass> {
     PreservedAnalyses run(Function &F, FunctionAnalysisManager &) {
         visitor(F);
         return PreservedAnalyses::all();
@@ -97,14 +97,14 @@ extern "C" LLVM_ATTRIBUTE_WEAK ::llvm::PassPluginLibraryInfo
 llvmGetPassPluginInfo() {
     return {
         .APIVersion = LLVM_PLUGIN_API_VERSION,
-        .PluginName = "DataflowAnalyzer",
+        .PluginName = "DataflowGenerator",
         .PluginVersion = "v0.1",
         .RegisterPassBuilderCallbacks = [](PassBuilder &PB) {
             PB.registerPipelineParsingCallback(
                 [](StringRef Name, FunctionPassManager &FPM,
                    ArrayRef<PassBuilder::PipelineElement>) {
-                  if (Name == "dataflow-analyzer") {
-                    FPM.addPass(DataflowAnalyzerPass());
+                  if (Name == "dataflow-generator") {
+                    FPM.addPass(DataflowGeneratorPass());
                     return true;
                   }
                   return false;
