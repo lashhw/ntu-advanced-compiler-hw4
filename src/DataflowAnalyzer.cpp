@@ -24,7 +24,7 @@ void visitor(Function &F) {
         if (!arg.getType()->isPointerTy()) {
             std::string inName = "in" + std::to_string(inCounter++);
             nodeNames[&arg] = inName;
-            errs() << "    " << inName << " [label=\"in: " << arg.getName() << "\", shape=box];\n";
+            errs() << "    " << inName << " [label=\"" << arg.getName() << "\", shape=box];\n";
         } else {
             std::string outName = "out" + std::to_string(outCounter++);
             outNames[&arg] = outName;
@@ -35,14 +35,14 @@ void visitor(Function &F) {
     errs() << "  subgraph cluster_outputs {\n";
     errs() << "    output_group [style=invis];\n";
     for (const auto &outName : outNames)
-        errs() << "    " << outName.second << " [label=\"out: " << outName.first->getName() << "\", shape=box];\n";
+        errs() << "    " << outName.second << " [label=\"" << outName.first->getName() << "\", shape=box];\n";
     errs() << "  }\n";
 
     unsigned opCounter = 0;
     for (auto &BB : F) {
         for (auto &I : BB) {
             if (isa<BinaryOperator>(I)) {
-                std::string nodeName = "operand" + std::to_string(opCounter++);
+                std::string nodeName = "op" + std::to_string(opCounter++);
                 nodeNames[&I] = nodeName;
               
                 std::string opSymbol;
@@ -58,11 +58,10 @@ void visitor(Function &F) {
 
                 unsigned opIdx = 0;
                 for (Use &U : I.operands()) {
-                    Value *operand = U.get();
-                    std::string srcName = nodeNames[operand];
+                    Value *op = U.get();
+                    std::string srcName = nodeNames[op];
 
-                    std::string varName = operand->getName().str();
-                    assert(!varName.empty() && "Variable name is empty");
+                    std::string varName = op->getName().str();
                     varName = (opIdx == 0) ? "op1: " + varName : "op2: " + varName;
                   
                     errs() << "  " << srcName << " -> " << nodeName << " [label=\"" << varName << "\"];\n";
@@ -72,8 +71,6 @@ void visitor(Function &F) {
                 StoreInst *SI = cast<StoreInst>(&I);
                 Value *ptr = SI->getPointerOperand();
                 Value *val = SI->getValueOperand();
-                assert(outNames.count(ptr) && "Store pointer not found");
-                assert(nodeNames.count(val) && "Store value not found");
 
                 errs() << "  " << nodeNames[val] << " -> " << outNames[ptr] << " [label=\"" << "op1: " << ptr->getName().str() << "\"];\n";
             } else {
