@@ -1,8 +1,10 @@
 void rotation(
     // input constant
     float two,
+
     // input vector
     float vx, float vy, float vz,
+
     // input quaternion (normalized)
     float qw, float qx, float qy, float qz,
 

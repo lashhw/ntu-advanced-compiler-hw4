@@ -1,6 +1,7 @@
 void sobel(
     // input constant
     float two,
+
     // input matrix
     float p00, float p01, float p02,
     float p10, float p11, float p12,
