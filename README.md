@@ -18,7 +18,7 @@ tests/run.sh <source_file>
 
 For example:
 ```bash
-tests/run.sh tests/testcases/matrix.cpp
+tests/run.sh tests/testcases/cse.cpp
 ```
 
 The resulting dataflow graphs will be saved as `noopt.dot` (unoptimized) and `opt.dot` (optimized) in your current working directory.  
