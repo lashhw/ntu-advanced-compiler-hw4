@@ -137,12 +137,12 @@ struct GraphValidator {
             for (const auto& outNode : outputNodes)
                 nodes[outNode].value = evaluateNode(outNode);
 
-            std::unordered_map<std::string, float*> outputMapping = {
-                {"out0", &out[0]}, {"out1", &out[1]}, {"out2", &out[2]}, {"out3", &out[3]}
+            std::unordered_map<std::string, float> outputMapping = {
+                {"out0", out[0]}, {"out1", out[1]}, {"out2", out[2]}, {"out3", out[3]}
             };
 
             for (const auto& [outNode, _] : outputMapping) {
-                float expected = *outputMapping[outNode];
+                float expected = outputMapping[outNode];
                 float actual = nodes.find(outNode) == nodes.end() ? 0.0f : nodes[outNode].value;
                 
                 // std::cout << "expected: " << expected << ", actual: " << actual << std::endl;
