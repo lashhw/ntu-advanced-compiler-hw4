@@ -9,7 +9,7 @@ void dce(
     float *e
 ) {
     float x = a * b;
-    float y = c + a;
-    float z = x + d; // dead
+    float y = a + c;
+    float z = x + d;  // dead
     *e = y;
 }
