@@ -7,10 +7,13 @@ void cse(
 
     // output
     float *e,
-    float *f
+    float *f,
+    float *g
 ) {
-    float x = (a + b) * c;
-    float y = (a + b) * d;
+    float x = (a + b) * (c + d);
+    float y = (a + b) * (a + b);
+    float z = (c + d) * (a + b);
     *e = x;
     *f = y;
+    *g = z;
 }

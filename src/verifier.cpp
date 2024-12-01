@@ -8,7 +8,7 @@
 #include <cassert>
 
 void copy_prop(float, float, float*);
-void cse(float, float, float, float, float*, float*);
+void cse(float, float, float, float, float*, float*, float*);
 void dce(float, float, float, float, float*);
 void lagrange(float, float, float, float, float, float, float, float*);
 void matrix(float, float, float, float, float, float, float, float, float*, float*, float*, float*);
@@ -106,7 +106,7 @@ struct GraphValidator {
             if (testName == "copy_prop") {
                 copy_prop(in[0], in[1], &out[0]);
             } else if (testName == "cse") {
-                cse(in[0], in[1], in[2], in[3], &out[0], &out[1]);
+                cse(in[0], in[1], in[2], in[3], &out[0], &out[1], &out[2]);
             } else if (testName == "dce") {
                 dce(in[0], in[1], in[2], in[3], &out[0]);
             } else if (testName == "lagrange") {
