@@ -58,16 +58,15 @@ void visitor(Function &F) {
 
                 errs() << "  " << nodeName << " [label=\"" << opSymbol << "\", shape=circle, width=0.1, height=0.1, margin=0];\n";
 
-                unsigned opIdx = 0;
-                for (Use &U : I.operands()) {
-                    Value *op = U.get();
+                assert(I.getNumOperands() == 2 && "Binary operator must have 2 operands");
+                for (unsigned i = 0; i < 2; i++) {
+                    Value *op = I.getOperand(i);
                     std::string srcName = nodeNames[op];
 
                     std::string varName = op->getName().str();
-                    varName = (opIdx == 0) ? "op1: " + varName : "op2: " + varName;
+                    varName = (i == 0) ? "op1: " + varName : "op2: " + varName;
                   
                     errs() << "  " << srcName << " -> " << nodeName << " [label=\"" << varName << "\"];\n";
-                    opIdx++;
                 }
             } else if (isa<StoreInst>(I)) {
                 StoreInst *SI = cast<StoreInst>(&I);
