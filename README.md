@@ -2,7 +2,7 @@
 
 ## 1. Environment
 
-Before starting, ensure you are working on the `ws1` so that all the required tools and dependencies are installed.
+Before starting, ensure you are working on the `ws1` so that all the required tools and dependencies are satisfied.
 
 ## 2. Build the Project
 
